@@ -28,7 +28,7 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
 input.onButtonPressed(Button.AB, function () {
     if (start != 0 && stop != 0) {
         // tutaj np.8m
-        basic.showString("" + (3.6 * (meters / ((stop - start) / 1000))))
+        basic.showString("" + Math.round(3.6 * (meters / ((stop - start) / 1000))) + " km/h")
         basic.pause(3500)
         basic.clearScreen()
     } else {
