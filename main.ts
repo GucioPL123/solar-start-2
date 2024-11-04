@@ -7,42 +7,13 @@ radio.onReceivedNumber(function (receivedNumber) {
 })
 input.onButtonPressed(Button.A, function () {
     meters += 1
-    if (meters == 1) {
-        basic.showNumber(1)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 2) {
-        basic.showNumber(2)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 3) {
-        basic.showNumber(3)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 4) {
-        basic.showNumber(4)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 5) {
-        basic.showNumber(5)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 6) {
-        basic.showNumber(6)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 7) {
-        basic.showNumber(7)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 8) {
-        basic.showNumber(8)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 9) {
-        meters = 8
-    } else if (meters == -1) {
+    basic.showNumber(meters)
+    basic.pause(500)
+    basic.clearScreen()
+    if (meters == -1) {
         meters = 0
+    } else if (meters == 61) {
+        meters = 60
     }
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
@@ -52,53 +23,26 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
 input.onButtonPressed(Button.AB, function () {
     if (start != 0 && stop != 0) {
         // tutaj np.8m
-        basic.showString("" + convertToText(36 * (meters / Math.round(stop - start))) + "km/h")
+        basic.showString("" + (3.6 * (meters / ((stop - start) / 1000))))
         basic.pause(3500)
         basic.clearScreen()
     } else {
+        music.play(music.tonePlayable(277, music.beat(BeatFraction.Quarter)), music.PlaybackMode.UntilDone)
+        music.play(music.tonePlayable(294, music.beat(BeatFraction.Quarter)), music.PlaybackMode.UntilDone)
         basic.showIcon(IconNames.No)
-        basic.pause(500)
+        basic.pause(300)
         basic.clearScreen()
     }
 })
 input.onButtonPressed(Button.B, function () {
     meters += -1
-    if (meters == 1) {
-        basic.showNumber(1)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 2) {
-        basic.showNumber(2)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 3) {
-        basic.showNumber(3)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 4) {
-        basic.showNumber(4)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 5) {
-        basic.showNumber(5)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 6) {
-        basic.showNumber(6)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 7) {
-        basic.showNumber(7)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 8) {
-        basic.showNumber(8)
-        basic.pause(500)
-        basic.clearScreen()
-    } else if (meters == 9) {
-        meters = 8
-    } else if (meters == -1) {
+    basic.showNumber(meters)
+    basic.pause(500)
+    basic.clearScreen()
+    if (meters == -1) {
         meters = 0
+    } else if (meters == 61) {
+        meters = 60
     }
 })
 let stop = 0
