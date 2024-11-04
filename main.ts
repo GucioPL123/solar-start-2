@@ -23,7 +23,11 @@ input.onButtonPressed(Button.A, function () {
     }
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    onoff = true
+    if (onoff == false) {
+        onoff = true
+    } else if (onoff == true) {
+        onoff = false
+    }
 })
 input.onButtonPressed(Button.AB, function () {
     if (start != 0 && stop != 0) {
@@ -53,6 +57,7 @@ input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
     music.play(music.tonePlayable(262, music.beat(BeatFraction.Quarter)), music.PlaybackMode.UntilDone)
     control.reset()
 })
+let radio_stop = false
 let stop = 0
 let radio_start = 0
 let start = 0
@@ -65,9 +70,10 @@ start = 0
 radio_start = 0
 stop = 0
 basic.forever(function () {
-    if (onoff == true && radio_start == 1 && input.lightLevel() < 205) {
+    if (onoff == true && radio_start == 1 && (radio_stop == false && input.lightLevel() < 205)) {
         stop = input.runningTime()
         basic.showIcon(IconNames.SmallDiamond)
+        radio_stop = true
         basic.pause(2000)
         basic.clearScreen()
         basic.showNumber(stop - start)
@@ -79,5 +85,11 @@ basic.forever(function () {
             # # # # .
             # # # # #
             `)
+        basic.pause(1000)
+        basic.clearScreen()
+    }
+    if (radio_stop == true) {
+        basic.pause(5000)
+        radio_stop = false
     }
 })
