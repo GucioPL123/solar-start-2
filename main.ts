@@ -14,8 +14,7 @@ radio.onReceivedNumber(function (receivedNumber) {
 })
 input.onButtonPressed(Button.A, function () {
     meters += 1
-    basic.showNumber(meters)
-    basic.pause(500)
+    basic.showString("" + meters + "m")
     basic.clearScreen()
     if (meters == -1) {
         meters = 0
@@ -42,8 +41,7 @@ input.onButtonPressed(Button.AB, function () {
 })
 input.onButtonPressed(Button.B, function () {
     meters += -1
-    basic.showNumber(meters)
-    basic.pause(500)
+    basic.showString("" + meters + "m")
     basic.clearScreen()
     if (meters == -1) {
         meters = 0
