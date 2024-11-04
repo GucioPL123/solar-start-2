@@ -69,7 +69,7 @@ meters = 0
 start = 0
 radio_start = 0
 stop = 0
-basic.forever(function () {
+loops.everyInterval(10, function () {
     if (onoff == true && radio_start == 1 && (radio_stop == false && input.lightLevel() < 205)) {
         stop = input.runningTime()
         basic.showIcon(IconNames.SmallDiamond)
@@ -88,6 +88,8 @@ basic.forever(function () {
         basic.pause(1000)
         basic.clearScreen()
     }
+})
+basic.forever(function () {
     if (radio_stop == true) {
         basic.pause(5000)
         radio_stop = false
