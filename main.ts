@@ -1,9 +1,16 @@
 radio.onReceivedNumber(function (receivedNumber) {
-    onoff = receivedNumber
+    basic.showLeds(`
+        # # # # #
+        # . . . .
+        # # # # #
+        . . . . #
+        # # # # #
+        `)
     radio_start = 1
     if (1 == receivedNumber) {
         start = input.runningTime()
     }
+    basic.clearScreen()
 })
 input.onButtonPressed(Button.A, function () {
     meters += 1
@@ -17,8 +24,7 @@ input.onButtonPressed(Button.A, function () {
     }
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    music.play(music.tonePlayable(262, music.beat(BeatFraction.Quarter)), music.PlaybackMode.UntilDone)
-    control.reset()
+    onoff = true
 })
 input.onButtonPressed(Button.AB, function () {
     if (start != 0 && stop != 0) {
@@ -45,21 +51,35 @@ input.onButtonPressed(Button.B, function () {
         meters = 60
     }
 })
+input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
+    music.play(music.tonePlayable(262, music.beat(BeatFraction.Quarter)), music.PlaybackMode.UntilDone)
+    control.reset()
+})
 let stop = 0
 let radio_start = 0
 let start = 0
 let meters = 0
-let onoff = 0
+let onoff = false
 radio.setGroup(1)
-onoff = 0
+onoff = false
 meters = 0
 start = 0
 radio_start = 0
 stop = 0
 basic.forever(function () {
-    if (onoff == 1 && radio_start == 1 && input.lightLevel() > 150) {
+    if (onoff == true && radio_start == 1 && input.lightLevel() < 205) {
         stop = input.runningTime()
-        basic.pause(1000)
+        basic.showIcon(IconNames.SmallDiamond)
+        basic.pause(2000)
+        basic.clearScreen()
         basic.showNumber(stop - start)
+    } else if (onoff == true) {
+        basic.showLeds(`
+            # . . . .
+            # # . . .
+            # # # . .
+            # # # # .
+            # # # # #
+            `)
     }
 })
