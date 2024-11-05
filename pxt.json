@@ -6,8 +6,8 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "microbit-pxt-timeanddate": "github:bsiever/microbit-pxt-timeanddate#v2.0.33",
-        "pxt-DS3231": "github:keble6/pxt-ds3231#v1.0.2"
+        "radio-brodcast": "*",
+        "radio-broadcast": "*"
     },
     "files": [
         "main.blocks",

@@ -1,3 +1,6 @@
+enum RadioMessage {
+    message1 = 49434
+}
 radio.onReceivedNumber(function (receivedNumber) {
     basic.showLeds(`
         # # # # #
@@ -56,8 +59,43 @@ input.onButtonPressed(Button.B, function () {
         meters = 60
     }
 })
-input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
-    music.play(music.tonePlayable(262, music.beat(BeatFraction.Quarter)), music.PlaybackMode.UntilDone)
+radio.onReceivedMessage(RadioMessage.message1, function () {
+    basic.showLeds(`
+        # . . . .
+        . # . . .
+        . . # . .
+        . . . # .
+        . . . . #
+        `)
+    basic.showLeds(`
+        # . . . .
+        . # . . .
+        . . # . .
+        . . . # .
+        . . . . .
+        `)
+    basic.showLeds(`
+        # . . . .
+        . # . . .
+        . . # . .
+        . . . . .
+        . . . . .
+        `)
+    basic.showLeds(`
+        # . . . .
+        . # . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        `)
+    basic.showLeds(`
+        # . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        `)
+    basic.clearScreen()
     control.reset()
 })
 let radio_stop = false
