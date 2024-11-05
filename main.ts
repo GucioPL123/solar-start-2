@@ -24,6 +24,7 @@ input.onButtonPressed(Button.A, function () {
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     if (onoff == false) {
+        basic.pause(500)
         music.play(music.tonePlayable(262, music.beat(BeatFraction.Quarter)), music.PlaybackMode.LoopingInBackground)
         onoff = true
     } else if (onoff == true) {
