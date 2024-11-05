@@ -14,7 +14,7 @@ radio.onReceivedNumber(function (receivedNumber) {
 })
 input.onButtonPressed(Button.A, function () {
     meters += 1
-    basic.showString("" + meters + "m")
+    basic.showNumber(meters)
     basic.clearScreen()
     if (meters == -1) {
         meters = 0
@@ -24,15 +24,17 @@ input.onButtonPressed(Button.A, function () {
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     if (onoff == false) {
+        music.play(music.tonePlayable(262, music.beat(BeatFraction.Quarter)), music.PlaybackMode.LoopingInBackground)
         onoff = true
     } else if (onoff == true) {
+        music.play(music.tonePlayable(262, music.beat(BeatFraction.Quarter)), music.PlaybackMode.InBackground)
         onoff = false
     }
 })
 input.onButtonPressed(Button.AB, function () {
     if (start != 0 && stop != 0) {
         // tutaj np.8m
-        basic.showString("" + Math.round(3.6 * (meters / ((stop - start) / 1000))) + " km/h")
+        basic.showNumber(Math.round(3.6 * (meters / ((stop - start) / 1000))))
         basic.pause(3500)
         basic.clearScreen()
     } else {
@@ -45,7 +47,7 @@ input.onButtonPressed(Button.AB, function () {
 })
 input.onButtonPressed(Button.B, function () {
     meters += -1
-    basic.showString("" + meters + "m")
+    basic.showNumber(meters)
     basic.clearScreen()
     if (meters == -1) {
         meters = 0
@@ -69,24 +71,15 @@ meters = 0
 start = 0
 radio_start = 0
 stop = 0
-loops.everyInterval(10, function () {
+loops.everyInterval(50, function () {
     if (onoff == true && radio_start == 1 && (radio_stop == false && input.lightLevel() < 205)) {
         stop = input.runningTime()
-        basic.showIcon(IconNames.SmallDiamond)
+        music.play(music.tonePlayable(294, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
+        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.InBackground)
         radio_stop = true
         basic.pause(2000)
         basic.clearScreen()
         basic.showNumber(stop - start)
-    } else if (onoff == true) {
-        basic.showLeds(`
-            # . . . .
-            # # . . .
-            # # # . .
-            # # # # .
-            # # # # #
-            `)
-        basic.pause(1000)
-        basic.clearScreen()
     }
 })
 basic.forever(function () {
