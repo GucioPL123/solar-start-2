@@ -11,6 +11,7 @@ radio.onReceivedNumber(function (receivedNumber) {
         start = input.runningTime()
     }
     basic.clearScreen()
+    radio.setGroup(2)
 })
 input.onButtonPressed(Button.A, function () {
     meters += 1
@@ -34,7 +35,7 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
 input.onButtonPressed(Button.AB, function () {
     if (start != 0 && stop != 0) {
         // tutaj np.8m
-        basic.showNumber(Math.round(3.6 * (meters / ((stop - start) / 1000))))
+        basic.showNumber(3.6 * (meters / ((stop - start) / 1000)))
         basic.pause(3500)
         basic.clearScreen()
     } else {
@@ -73,6 +74,7 @@ radio_start = 0
 stop = 0
 loops.everyInterval(50, function () {
     if (onoff == true && radio_start == 1 && (radio_stop == false && input.lightLevel() < 205)) {
+        onoff = false
         stop = input.runningTime()
         music.play(music.tonePlayable(294, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
         music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.InBackground)
